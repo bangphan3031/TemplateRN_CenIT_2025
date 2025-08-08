@@ -1,0 +1,27 @@
+{
+  "title": "Source core demo (Vietnamese ver)",
+  "input": {
+    "name": "Họ tên",
+    "password": "Mật khẩu",
+    "phoneNumber": "Số điện thoại",
+    "age": "Tuổi"
+  },
+  "button": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "yes": "Có",
+    "no": "Không",
+    "confirm": "Xác nhận",
+    "add": "Thêm"
+  },
+  "message": {
+    "required": "{0} bắt buộc nhập",
+    "integerFormat": "{0} là số nguyên",
+    "phoneNumberFormat": "Số điện thoại không đúng định dạng"
+  },
+  "bottomtab": {
+    "home": "Trang chủ",
+    "info": "Thông tin",
+    "setting": "Cài đặt"
+  }
+}
