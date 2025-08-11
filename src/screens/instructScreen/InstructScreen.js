@@ -7,7 +7,7 @@ import DefaultText from '../../components/texts/DefaultText';
 import {useDispatch} from 'react-redux';
 import {setDeviceToken} from '../../actions/tokenAction';
 import {getToken, getMessage} from '../../utils/firebase';
-import messaging from '@react-native-firebase/messaging';
+import {getMessaging} from '@react-native-firebase/messaging';
 
 const InstructScreen = () => {
   const navigation = useNavigation();
@@ -16,7 +16,8 @@ const InstructScreen = () => {
 
   useEffect(() => {
     const checkPermission = async () => {
-      const authStatus = await messaging().requestPermission();
+      const messaging = getMessaging();
+      const authStatus = await messaging.requestPermission();
       const enabled =
         authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
         authStatus === messaging.AuthorizationStatus.PROVISIONAL;
