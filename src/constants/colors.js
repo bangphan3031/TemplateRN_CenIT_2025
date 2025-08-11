@@ -6,6 +6,10 @@ const colors = {
   secondary: '#6c757d',
   white: '#ffffff',
   black: '#000000',
+  pink: '#ff497e',
+  orange: '#FFA500',
+  secondaryBg: '#f2f2f2',
+  purple: '#800080',
 };
 
 export default colors;

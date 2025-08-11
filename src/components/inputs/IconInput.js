@@ -23,13 +23,14 @@ const IconInput = ({
     <View style={styles.inputContainer}>
       <TextInput
         label={label}
+        textColor={colors.black}
         style={style}
         value={value}
         onChangeText={onChange}
         onBlur={onBlur}
         error={errorMessage}
         mode={mode}
-        inputMode={inputMode ? inputMode : 'none'}
+        inputMode={inputMode ? inputMode : 'text'}
         keyboardType={keyboardType ? keyboardType : 'default'}
         right={
           isPasswordInput ? (

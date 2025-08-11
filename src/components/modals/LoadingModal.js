@@ -1,6 +1,6 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
-import { ActivityIndicator } from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
+import React, {forwardRef, useImperativeHandle} from 'react';
+import {ActivityIndicator} from 'react-native-paper';
+import {StyleSheet, View} from 'react-native';
 import colors from '../../constants/colors';
 
 const LoadingModal = forwardRef(({}, ref) => {

@@ -1,13 +1,15 @@
 import i18next from './src/localization/i18n';
 import React from 'react';
-import { I18nextProvider } from 'react-i18next';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import { PaperProvider, DefaultTheme } from 'react-native-paper';
-import { Provider } from 'react-redux';
-import { persistor, store } from './src/store/store';
-import { PersistGate } from 'redux-persist/integration/react';
-import { NavigationContainer } from '@react-navigation/native';
+import {I18nextProvider, useTranslation} from 'react-i18next';
+import {StyleSheet, Text} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import {PaperProvider, DefaultTheme} from 'react-native-paper';
+import {Provider} from 'react-redux';
+import {persistor, store} from './src/store/store';
+import {PersistGate} from 'redux-persist/integration/react';
+import {NavigationContainer} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import RootNavigator from './src/navigation/RootNavigation';
 import LoadingProvider from './src/providers/LoadingProvider';
 import ToastProvider from './src/providers/ToastProvider';
 import BottomTabs from './src/navigation/BottomNavigation';
@@ -22,7 +24,6 @@ const theme = {
     text: '#000000', // Đặt màu chữ
   },
 };
-
 const App = () => {
   return (
     <Provider store={store}>
@@ -33,7 +34,7 @@ const App = () => {
               <ToastProvider>
                 <LoadingProvider>
                   <NavigationContainer>
-                    <BottomTabs />
+                    <RootNavigator />
                   </NavigationContainer>
                   <Toast />
                 </LoadingProvider>

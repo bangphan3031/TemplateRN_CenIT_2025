@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { API_BASE_URL, API_PRIVATE_KEY } from '../constants/api';
-import { store } from '../store/store';
-import { MD5 } from 'crypto-js';
+import {API_BASE_URL, API_PRIVATE_KEY} from '../constants/api';
+import {store} from '../store/store';
+import {MD5} from 'crypto-js';
 
 // File chứa các hàm gọi api yêu cầu kèm theo Signature và Token ở Header
 
@@ -10,16 +10,13 @@ const getData = async (url = '', params = {}) => {
   try {
     // lấy thông tin user đã đăng nhập từ store
     const user = store.getState().userReducer.user;
+
     // gọi api
     const response = await axios.get(`${API_BASE_URL}/${url}`, {
       params: params,
       headers: {
-        Signature: user
-          ? MD5(API_PRIVATE_KEY + user.TokenAccess)
-          : 'aa098e89b92f48545a52509fddc48830',
-        Token: user
-          ? user.TokenAccess
-          : '1ab74ae3c-01da-41a2-99fb-0a56d53eef46',
+        Signature: user ? MD5(API_PRIVATE_KEY + user.Token) : '',
+        Token: user ? user.Token : '',
       },
     });
 
@@ -36,15 +33,12 @@ const postData = async (url = '', data = {}) => {
   try {
     // lấy thông tin user đã đăng nhập từ store
     const user = store.getState().userReducer.user;
+
     // gọi api
     const response = await axios.post(`${API_BASE_URL}/${url}`, data, {
       headers: {
-        Signature: user
-          ? MD5(API_PRIVATE_KEY + user.TokenAccess)
-          : 'aa098e89b92f48545a52509fddc48830',
-        Token: user
-          ? user.TokenAccess
-          : '1ab74ae3c-01da-41a2-99fb-0a56d53eef46',
+        Signature: user ? MD5(API_PRIVATE_KEY + user.Token) : '',
+        Token: user ? user.Token : '',
       },
     });
 
@@ -94,4 +88,4 @@ const uploadMultipleFiles = async (url = '', form, files = []) => {
   }
 };
 
-export { getData, postData, uploadMultipleFiles };
+export {getData, postData, uploadMultipleFiles};

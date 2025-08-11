@@ -1,10 +1,12 @@
-import { combineReducers } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
+import {combineReducers} from 'redux';
+import {configureStore} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { persistStore, persistReducer } from 'redux-persist';
+import {persistStore, persistReducer} from 'redux-persist';
 import userReducer from '../reducers/userReducer';
 import localeReducer from '../reducers/localeReducer';
-import sharedReducer from '../reducers/sharedReducer';
+import agencyReducer from '../reducers/agencyReducer';
+import tokenReducer from '../reducers/tokenReducer';
+import dataReducer from '../reducers/dataReducer';
 
 const persistConfig = {
   key: 'root',
@@ -14,19 +16,17 @@ const persistConfig = {
 const rootReducer = combineReducers({
   userReducer,
   localeReducer,
-  sharedReducer,
+  agencyReducer,
+  tokenReducer,
+  dataReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
 });
 
 const persistor = persistStore(store);
 
-export { store, persistor };
+export {store, persistor};

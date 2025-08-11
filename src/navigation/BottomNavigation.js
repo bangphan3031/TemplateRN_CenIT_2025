@@ -1,11 +1,11 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/homeScreen/HomeScreen';
-import InfoScreen from '../screens/infoScreen/InfoScreen';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import AgencyScreen from '../screens/agencyScreen/AgencyScreen';
 import SettingScreen from '../screens/settingScreen/SettingScreen';
-import { Platform, View } from 'react-native';
-import { Icon } from 'react-native-paper';
+import {View, Platform} from 'react-native';
+import {Icon} from 'react-native-paper';
 import colors from '../constants/colors';
 import DefaultText from '../components/texts/DefaultText';
+import HistoryScreen from '../screens/infoScreen/HistoryScreen';
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
@@ -25,58 +25,61 @@ const screenOptions = {
     right: 0,
     left: 0,
     elevation: 0,
-    height: 60,
+    height: Platform.OS === 'ios' ? 90 : 60,
     background: '#fff',
   },
 };
 
 const BottomTabs = () => {
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
+    <Tab.Navigator screenOptions={screenOptions} initialRouteName="Agency">
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="History"
+        component={HistoryScreen}
         options={{
-          title: 'Trang chủ',
-          tabBarIcon: ({ focused }) => {
+          title: 'Lịch sử đặt số',
+          headerShown: false,
+          tabBarIcon: ({focused}) => {
             return (
-              <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Icon
-                  source="home"
+                  source="clock"
                   size={24}
                   color={focused ? colors.primary : colors.secondary}
                 />
                 <DefaultText
-                  text="Trang chủ"
+                  text="Lịch sử đặt số"
                   style={{
                     fontSize: 12,
                     color: focused ? colors.primary : colors.secondary,
                   }}
-                ></DefaultText>
+                />
               </View>
             );
           },
         }}
       />
       <Tab.Screen
-        name="Info"
-        component={InfoScreen}
+        name="Agency"
+        component={AgencyScreen}
         options={{
-          title: 'Thông tin',
-          tabBarIcon: ({ focused }) => {
+          title: 'Chọn lĩnh vực',
+          headerShown: false,
+          tabBarIcon: ({focused}) => {
             return (
-              <View
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: colors.primary,
-                  width: Platform.OS == 'ios' ? 50 : 60,
-                  height: Platform.OS == 'ios' ? 50 : 60,
-                  top: Platform.OS == 'ios' ? -10 : -20,
-                  borderRadius: Platform.OS == 'ios' ? 25 : 30,
-                }}
-              >
-                <Icon source="information" size={28} color={colors.white} />
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Icon
+                  source="ticket-confirmation"
+                  size={24}
+                  color={focused ? colors.primary : colors.secondary}
+                />
+                <DefaultText
+                  text={'Đặt số'}
+                  style={{
+                    fontSize: 12,
+                    color: focused ? colors.primary : colors.secondary,
+                  }}
+                />
               </View>
             );
           },
@@ -86,22 +89,23 @@ const BottomTabs = () => {
         name="Setting"
         component={SettingScreen}
         options={{
-          title: 'Cài đặt',
-          tabBarIcon: ({ focused }) => {
+          title: 'Khác',
+          headerShown: false,
+          tabBarIcon: ({focused}) => {
             return (
-              <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Icon
-                  source="cog"
+                  source="dots-horizontal"
                   size={24}
                   color={focused ? colors.primary : colors.secondary}
                 />
                 <DefaultText
-                  text="Cài đặt"
+                  text={'Khác'}
                   style={{
                     fontSize: 12,
                     color: focused ? colors.primary : colors.secondary,
                   }}
-                ></DefaultText>
+                />
               </View>
             );
           },

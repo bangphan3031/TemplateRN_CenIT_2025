@@ -8,6 +8,8 @@ export const useToast = () => {
 };
 
 const ToastProvider = ({children}) => {
+  console.log('show');
+
   const [isShowToast, setIsShowToast] = useState(false);
   const [option, setOption] = useState({
     type: 'info',

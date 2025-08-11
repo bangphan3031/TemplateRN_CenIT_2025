@@ -33,22 +33,53 @@ const DefaultText = ({
   fontSize = 14,
   isItalic = false,
   style,
+  textAlign = 'left',
+  color = colors.black,
+  bgColor = null,
+  numberOfLines = null,
+  onTextLayout,
 } = props) => {
   return (
-    <Text
-      style={[
-        {
-          fontSize: fontSize,
-          fontFamily: isItalic
-            ? HelveticaNeueFont[fontWeight.toString() + 'italic']
-            : HelveticaNeueFont[fontWeight.toString()],
-          fontWeight: fontWeight,
-          color: colors.black,
-        },
-        style,
-      ]}>
-      {text}
-    </Text>
+    <>
+      {numberOfLines ? (
+        <Text
+          numberOfLines={numberOfLines}
+          ellipsizeMode="tail"
+          style={[
+            {
+              fontSize: fontSize,
+              fontFamily: isItalic
+                ? HelveticaNeueFont[fontWeight.toString() + 'italic']
+                : HelveticaNeueFont[fontWeight.toString()],
+              fontWeight: fontWeight,
+              color: color,
+              textAlign: textAlign,
+              backgroundColor: bgColor,
+            },
+            style,
+          ]}
+          onTextLayout={onTextLayout}>
+          {text}
+        </Text>
+      ) : (
+        <Text
+          style={[
+            {
+              fontSize: fontSize,
+              fontFamily: isItalic
+                ? HelveticaNeueFont[fontWeight.toString() + 'italic']
+                : HelveticaNeueFont[fontWeight.toString()],
+              fontWeight: fontWeight,
+              color: color,
+              textAlign: textAlign,
+            },
+            style,
+          ]}
+          onTextLayout={onTextLayout}>
+          {text}
+        </Text>
+      )}
+    </>
   );
 };
 

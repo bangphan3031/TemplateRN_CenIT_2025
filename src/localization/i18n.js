@@ -1,7 +1,8 @@
 import i18next from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import {initReactI18next} from 'react-i18next';
 import English from './eng.json';
 import Vietnamese from './viet.json';
+import Korea from './korea.json';
 
 const resources = {
   eng: {
@@ -9,6 +10,9 @@ const resources = {
   },
   vie: {
     translation: Vietnamese,
+  },
+  korea: {
+    translation: Korea,
   },
 };
 

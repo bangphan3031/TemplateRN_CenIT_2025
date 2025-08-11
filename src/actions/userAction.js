@@ -1,6 +1,6 @@
 export const SET_USER = 'SET_USER';
 export const REMOVE_USER = 'REMOVE_USER';
-export const SET_DEVICE_TOKEN = 'SET_DEVICE_TOKEN';
+export const UPDATE_PHONE = 'UPDATE_PHONE';
 
 export const setUser = user => {
   return {
@@ -15,9 +15,9 @@ export const removeUser = () => {
   };
 };
 
-export const setDeviceToken = deviceToken => {
+export const updatePhone = phone => {
   return {
-    type: SET_DEVICE_TOKEN,
-    payload: deviceToken,
+    type: UPDATE_PHONE,
+    payload: phone,
   };
 };

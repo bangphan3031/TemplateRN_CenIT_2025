@@ -1,26 +1,29 @@
 import {StyleSheet} from 'react-native';
-import {Button, Icon} from 'react-native-paper';
+import {Button, Icon, Text} from 'react-native-paper';
 import colors from '../../constants/colors';
-import {Text} from 'react-native';
 
 const DefaultButton = ({
   title,
   onPress,
   type = 'primary',
   style,
-  mode,
+  mode = 'contained',
   leftIcon,
   rightIcon,
+  width,
+  height,
+  titleStyle,
 } = props) => {
   return (
     <Button
       onPress={onPress}
       labelStyle={{fontSize: 14}}
       buttonColor={mode === 'outlined' ? colors.white : colors[type]}
-      textColor={mode === 'outlined' ? colors[type] : colors.white}
       mode={mode}
       icon={leftIcon ? leftIcon : rightIcon ? rightIcon : ''}
-      contentStyle={{flexDirection: rightIcon ? 'row-reverse' : 'row'}}
+      contentStyle={[
+        {flexDirection: rightIcon ? 'row-reverse' : 'row', width, height},
+      ]}
       style={[
         styles.button,
         {
@@ -29,7 +32,14 @@ const DefaultButton = ({
         },
         style,
       ]}>
-      <Text style={styles.title}>{title}</Text>
+      <Text
+        style={[
+          styles.title,
+          {color: mode === 'outlined' ? colors[type] : colors.white},
+          titleStyle,
+        ]}>
+        {title}
+      </Text>
     </Button>
   );
 };
@@ -38,7 +48,18 @@ export default DefaultButton;
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 16,
+    borderRadius: 26,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  title: {},
+  shadowButton: {
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 14,
+  },
 });

@@ -1,8 +1,7 @@
-import { SET_USER, REMOVE_USER, SET_DEVICE_TOKEN } from '../actions/userAction';
+import {SET_USER, REMOVE_USER, UPDATE_PHONE} from '../actions/userAction';
 
 const intitalState = {
   user: null,
-  deviceToken: null,
 };
 
 const userReducer = (state = intitalState, action) => {
@@ -17,10 +16,13 @@ const userReducer = (state = intitalState, action) => {
         ...state,
         user: null,
       };
-    case SET_DEVICE_TOKEN:
+    case UPDATE_PHONE:
       return {
         ...state,
-        deviceToken: action.payload,
+        user: {
+          ...state.user,
+          phone: action.payload,
+        },
       };
 
     default:
