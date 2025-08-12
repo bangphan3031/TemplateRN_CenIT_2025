@@ -21,6 +21,7 @@ const UserScreen = () => {
   const dispatch = useDispatch();
   const {hasPermission, requestPermission} = useCameraPermission();
   const device = useCameraDevice('back');
+  const [zoom, setZoom] = useState(2.0);
 
   useEffect(() => {
     const checkPermission = async () => {
@@ -97,7 +98,7 @@ const UserScreen = () => {
               codeScanner={codeScanner}
               device={device}
               isActive={true}
-              zoom={2.0}
+              zoom={zoom}
             />
             <View style={styles.forcusCamera} />
             <View style={styles.descContainer}>

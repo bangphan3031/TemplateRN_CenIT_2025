@@ -25,7 +25,7 @@ const screenOptions = {
     right: 0,
     left: 0,
     elevation: 0,
-    height: Platform.OS === 'ios' ? 90 : 60,
+    height: Platform.OS === 'ios' ? 90 : 70,
     background: '#fff',
   },
 };
@@ -41,7 +41,7 @@ const BottomTabs = () => {
           headerShown: false,
           tabBarIcon: ({focused}) => {
             return (
-              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{alignItems: 'center', justifyContent: 'center', width: 80, height: 60, paddingTop: '100%'}}>
                 <Icon
                   source="clock"
                   size={24}
@@ -67,7 +67,7 @@ const BottomTabs = () => {
           headerShown: false,
           tabBarIcon: ({focused}) => {
             return (
-              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{alignItems: 'center', justifyContent: 'center', width: 80, height: 60, paddingTop: '100%'}}>
                 <Icon
                   source="ticket-confirmation"
                   size={24}
@@ -93,7 +93,7 @@ const BottomTabs = () => {
           headerShown: false,
           tabBarIcon: ({focused}) => {
             return (
-              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{alignItems: 'center', justifyContent: 'center', width: 80, height: 60, paddingTop: '100%' }}>
                 <Icon
                   source="dots-horizontal"
                   size={24}
