@@ -22,6 +22,6 @@ export default styles = StyleSheet.create({
     paddingTop: 10,
   },
   cardList: {
-    marginBottom: Platform.OS === 'ios' ? 150 : 0,
+    marginBottom: Platform.OS === 'ios' ? 150 : 130,
   }
 });

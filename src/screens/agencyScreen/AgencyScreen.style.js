@@ -12,7 +12,7 @@ export default styles = StyleSheet.create({
   },
   homeScrollView: {
     padding: 10,
-    marginBottom: Platform.OS === 'ios' ? 90 : 0,
+    marginBottom: Platform.OS === 'ios' ? 90 : 70,
   },
   buttonsContainer: {
     marginTop: 10,

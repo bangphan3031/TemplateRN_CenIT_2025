@@ -80,7 +80,7 @@ android {
 
     namespace "com.templatern_cenit_2025"
     defaultConfig {
-        applicationId "com.templatern_cenit_2025"
+        applicationId "com.com.get_number_online"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
