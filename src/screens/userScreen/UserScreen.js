@@ -24,6 +24,10 @@ const UserScreen = () => {
   const [zoom, setZoom] = useState(2.0);
 
   useEffect(() => {
+    setTimeout(() => setZoom(3), 1000);
+  }, []);
+
+  useEffect(() => {
     const checkPermission = async () => {
       if (!hasPermission) {
         await requestPermission();
