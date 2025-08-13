@@ -24,7 +24,7 @@ const UserScreen = () => {
   const [zoom, setZoom] = useState(2.0);
 
   useEffect(() => {
-    setTimeout(() => setZoom(3), 1000);
+    setTimeout(() => setZoom(2), 100);
   }, []);
 
   useEffect(() => {
@@ -85,7 +85,6 @@ const UserScreen = () => {
       </View>
     );
   }
-
   return (
     <>
       <Loading isLoading={isLoading} />
