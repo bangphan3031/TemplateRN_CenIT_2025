@@ -80,11 +80,11 @@ android {
 
     namespace "com.templatern_cenit_2025"
     defaultConfig {
-        applicationId "com.com.get_number_online"
+        applicationId "com.get_number_online"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.2.1"
     }
     signingConfigs {
         debug {
