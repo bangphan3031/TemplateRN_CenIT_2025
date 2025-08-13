@@ -23,9 +23,9 @@ const UserScreen = () => {
   const device = useCameraDevice('back');
   const [zoom, setZoom] = useState(1.0);
 
-  useEffect(() => {
-    setTimeout(() => setZoom(2), 100);
-  }, []);
+  const onCameraInitialized = () => {
+      setZoom(2);
+  };
 
   useEffect(() => {
     const checkPermission = async () => {
@@ -102,6 +102,7 @@ const UserScreen = () => {
               device={device}
               isActive={true}
               zoom={zoom}
+              onInitialized={onCameraInitialized}
             />
             <View style={styles.forcusCamera} />
             <View style={styles.descContainer}>
