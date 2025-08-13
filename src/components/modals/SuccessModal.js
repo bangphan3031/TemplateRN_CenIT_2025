@@ -80,7 +80,7 @@ const SuccessModal = ({isVisible, onClose, data, minute}) => {
             />
           </View>
           <Text style={styles.warning}>
-            Quý khách vui lòng có mặt tại bộ phận Một cửa trước {minute} phút
+            Quý khách vui lòng có mặt tại bộ phận Một cửa trước 30 phút
             -&gt; đến máy bấm số -&gt; nhập mã xác nhận để nhận số.
           </Text>
         </View>
