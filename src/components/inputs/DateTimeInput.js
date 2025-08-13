@@ -26,7 +26,7 @@ const DateTimeInput = ({
       <TouchableWithoutFeedback onPress={() => setOpen(true)}>
         <View pointerEvents="box-only">
           <DefaultInput
-            value={value ? new Date(value).toLocaleDateString() : ''}
+            value={value ? new Date(value).toLocaleDateString('en-GB') : ''}
             label={label || ''}
             placeholder={placeholder}
             width={width}

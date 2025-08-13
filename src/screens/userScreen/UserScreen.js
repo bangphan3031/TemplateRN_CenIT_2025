@@ -21,7 +21,7 @@ const UserScreen = () => {
   const dispatch = useDispatch();
   const {hasPermission, requestPermission} = useCameraPermission();
   const device = useCameraDevice('back');
-  const [zoom, setZoom] = useState(2.0);
+  const [zoom, setZoom] = useState(1.0);
 
   useEffect(() => {
     setTimeout(() => setZoom(2), 100);

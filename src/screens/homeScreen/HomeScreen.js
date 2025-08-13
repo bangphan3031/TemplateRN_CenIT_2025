@@ -169,7 +169,7 @@ const HomeScreen = ({route}) => {
               value={registerDate}
               onChange={setRegisterDate}
               mode="date"
-              width={120}
+              width={130}
               style={{
                 borderWidth: 1,
                 borderRadius: 5,
