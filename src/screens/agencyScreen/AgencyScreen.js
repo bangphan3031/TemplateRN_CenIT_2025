@@ -8,6 +8,16 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import styles from './AgencyScreen.style';
+import {getApp} from '@react-native-firebase/app';
+import {
+  getMessaging,
+  requestPermission as fcmRequestPermission,
+  registerDeviceForRemoteMessages,
+  setAutoInitEnabled,
+  getToken as fcmGetToken,
+  AuthorizationStatus,
+  onTokenRefresh,
+} from '@react-native-firebase/messaging';
 import {useEffect, useState} from 'react';
 import DefaultButton from '../../components/buttons/DefaultButton';
 import colors from '../../constants/colors';
@@ -26,6 +36,11 @@ import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import {setWardId} from '../../actions/agencyAction';
+import {setDeviceToken} from '../../actions/tokenAction';
+
+// Initialize Firebase app & Messaging instance (modular API)
+const app = getApp();
+const m = getMessaging(app);
 
 const AgencyScreen = () => {
   const navigation = useNavigation();
@@ -42,6 +57,90 @@ const AgencyScreen = () => {
   const [wards, setWards] = useState([]);
   const [selectedWard, setSelectedWard] = useState();
   const [selectedWardId, setSelectedWardId] = useState();
+
+  useEffect(() => {
+    let unsubscribeTokenRefresh;
+
+    const registerAppWithFCM = async () => {
+      // iOS: ensure remote messages are enabled and auto-init
+      if (Platform.OS === 'ios') {
+        await registerDeviceForRemoteMessages(m);
+        await setAutoInitEnabled(m, true);
+      }
+    };
+
+    const ensureAndroidNotificationPermission = async () => {
+      if (Platform.OS === 'android' && Platform.Version >= 33) {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+          );
+          if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+            console.log('Notification permission denied on Android 13+');
+          }
+        } catch (e) {
+          console.log('Request POST_NOTIFICATIONS error:', e);
+        }
+      }
+    };
+
+    const requestFcmPermissionLocal = async () => {
+      try {
+        await fcmRequestPermission(m);
+        await getDeviceToken();
+      } catch (error) {
+        console.log('[FCM] Request Permission rejected ', error);
+      }
+    };
+
+    const getDeviceToken = async () => {
+      try {
+        // Required on both platforms before getting a token
+        await registerDeviceForRemoteMessages(m);
+        await ensureAndroidNotificationPermission();
+        const token = await fcmGetToken(m);
+        console.log('FCM Token:', token);
+        if (token) {
+          dispatch(setDeviceToken(token));
+        }
+        // Subscribe to token refresh
+        unsubscribeTokenRefresh = onTokenRefresh(m, newToken => {
+          console.log('FCM Token refreshed:', newToken);
+          dispatch(setDeviceToken(newToken));
+        });
+      } catch (error) {
+        console.log('Get token error:', error);
+      }
+    };
+
+    const checkPermission = async () => {
+      console.log('Checking FCM permission...');
+      try {
+        const authStatus = await fcmRequestPermission(m);
+        const enabled =
+          authStatus === AuthorizationStatus.AUTHORIZED ||
+          authStatus === AuthorizationStatus.PROVISIONAL;
+        if (enabled) {
+          await getDeviceToken();
+        } else {
+          await requestFcmPermissionLocal();
+        }
+      } catch (e) {
+        console.log('Check permission error:', e);
+      }
+    };
+
+    (async () => {
+      await registerAppWithFCM();
+      await checkPermission();
+    })();
+
+    return () => {
+      if (typeof unsubscribeTokenRefresh === 'function') {
+        unsubscribeTokenRefresh();
+      }
+    };
+  }, [dispatch]);
 
   //Call api hiển thị danh sách xã, phường
   useEffect(() => {
